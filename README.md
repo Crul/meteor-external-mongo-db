@@ -36,6 +36,7 @@ this packages exports **ExternalMongoDb** class (server side) which has 2 method
 
 ## roadmap
 
+- add count support (tmeasday:publish-counts?)
 - add configuration/settings (optional prefix for collections)
 - disconnect / reconnect
 
