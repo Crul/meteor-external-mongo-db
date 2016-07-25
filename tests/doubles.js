@@ -1,4 +1,8 @@
-import meteorUtils from '../lib/utils/meteorUtils';
+'use strict'
+import meteorWrap from '../lib/utils/meteorWrap';
+import externalDbFactory from '../lib/externalDb/externalDbFactory'
+import arrayPublisher from '../lib/publish/arrayPublisher'
+import collectionPublisher from '../lib/publish/collectionPublisher'
 
 testData = {
   name: 'umdm',
@@ -27,14 +31,21 @@ Mongo.Collection = Mongo.Collection || _.identity;
 collectionMock = {};
 sinon.stub(Mongo, 'Collection').returns(collectionMock);
 
-remoteDbMock = {
+externalDbMock = {
     name: testData.name,
     collectionNames: sinon.spy(_.identity),
     open: sinon.spy(_.identity),
     close: sinon.spy(_.identity),
-    isConnected: _.identity,
+    isConnected:_.identity,
     createCollection: _.identity
 };
 
+sinon.stub(externalDbMock, 'isConnected');
+sinon.stub(externalDbMock, 'createCollection');
+
 bindEnvironmentFn = _.identity;
-sinon.stub(meteorUtils, 'bindEnvironment').returns(bindEnvironmentFn);
+sinon.stub(meteorWrap, 'bindEnvironment').returns(bindEnvironmentFn);
+
+sinon.stub(externalDbFactory, 'create').returns(externalDbMock);
+sinon.stub(arrayPublisher, 'publish');
+sinon.stub(collectionPublisher, 'publish');
