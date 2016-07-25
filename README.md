@@ -75,9 +75,8 @@ externalMongoDb.disconnect('dbName');
     Template.body.events({
         'click .collection'(event, instance) {
             let collectionName = $(arguments[0].currentTarget).html();
-            let meteorCollectionName = `umdm-${collectionName}`; 
 
-            Meteor.subscribe(meteorCollectionName);
+            Meteor.subscribe(collectionName);
             collections[collectionName] = collections[collectionName] || new Meteor.Collection(collectionName) 
             Collection = collections[collectionName];
             Session.set('collectionLoaded', true)

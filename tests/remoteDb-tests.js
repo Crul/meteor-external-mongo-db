@@ -121,10 +121,3 @@ Tinytest.add('RemoteDb should not be connected when state is not connected', fun
 
   test.isFalse(isConnected);
 });
-
-Tinytest.add('RemoteDb should return collectionNames', function (test) {
-  let remoteDb = new RemoteDb(testData.url);
-  let collectionPublicationName =  remoteDb.getCollectionPublicationName(testData.collection);
-
-  test.equal(collectionPublicationName, testData.collectionPublicationName);
-});

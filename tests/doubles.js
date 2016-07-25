@@ -33,8 +33,7 @@ remoteDbMock = {
     open: sinon.spy(_.identity),
     close: sinon.spy(_.identity),
     isConnected: _.identity,
-    createCollection: _.identity,
-    getCollectionPublicationName: _.identity
+    createCollection: _.identity
 };
 
 bindEnvironmentFn = _.identity;

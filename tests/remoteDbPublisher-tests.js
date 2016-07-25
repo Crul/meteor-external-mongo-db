@@ -110,15 +110,12 @@ Tinytest.add('RemoteDbPublisher should publishDbCollections', function (test) {
 });
 
 Tinytest.add('RemoteDbPublisher should publishCollection', function (test) {
-  let publicationCollectionName = 'publicationCollectionName';
   let collection = {name:'c1'};
   let remoteDbPublisher = new RemoteDbPublisher();
   sinon.stub(remoteDbPublisher.collectionPublisher, 'publish');
-  sinon.stub(remoteDbMock, 'getCollectionPublicationName').returns(publicationCollectionName);
 
   remoteDbPublisher.publishCollection(remoteDbPublisher, remoteDbMock, collection);
 
-  test.isTrue(remoteDbMock.getCollectionPublicationName.calledOnce);
   test.isTrue(remoteDbPublisher.collectionPublisher.publish.calledOnce);
-  test.isTrue(remoteDbPublisher.collectionPublisher.publish.calledWith(publicationCollectionName, sinon.match.func));
+  test.isTrue(remoteDbPublisher.collectionPublisher.publish.calledWith(collection.name, sinon.match.func));
 });
