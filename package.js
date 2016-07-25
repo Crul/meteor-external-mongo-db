@@ -1,6 +1,6 @@
 Package.describe({
   name: 'crul:meteor-external-mongo-db',
-  version: '0.0.2',
+  version: '0.0.3',
   summary: 'external mongo db connector for angular meteor apps',
   git: 'https://github.com/Crul/meteor-external-mongo-db',
   documentation: 'README.md'
@@ -10,6 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.3.5.1');
   api.use('ecmascript');
   api.use('underscore');
+  api.use('random');
   api.mainModule('meteor-external-mongo-db.js', 'server');
 });
 
