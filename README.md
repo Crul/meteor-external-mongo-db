@@ -15,8 +15,11 @@ meteor add crul:meteor-external-mongo-db
 ## package exports
 
 this packages exports **ExternalMongoDb** class (server side) which has 2 methods:
-- connect(dbUrl)
-- disconnect(dbName) 
+- connect(dbUrl): it publish:
+    - a collection named 'dbName-collections' with the collections of the remote DB
+    - all the server collections with plain names, so remote server should have no collections with same name in local DB
+
+- disconnect(dbName): not working :( 
 
 ```javascript
 import { ExternalMongoDb } from 'meteor/crul:meteor-external-mongo-db';
