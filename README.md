@@ -14,7 +14,7 @@ import { ExternalDbPublisher } from 'meteor/crul:meteor-external-mongo-db';
 if (Meteor.isServer) {
     var externalDbPublisher = new ExternalDbPublisher();
     externalDbPublisher.connect('mongodb://127.0.0.1:27017/dbName');
-    externalDbPublisher.disconnect('dbName');
+    // externalDbPublisher.disconnect('dbName'); // not working :(
 }
 ```
 
@@ -32,7 +32,7 @@ this packages exports:
         - a collection named **'dbName-collections'** with the collections of the remote DB
         - all the server collections with plain names, find function signature: **find(where, options)**
 
-    - *disconnect(dbName)*: not working :( 
+    - *disconnect(dbName)*: **disabled**, disconnect works but you cannot re-connect again so I've disabled the disconnect feature
 
 - **ExternalDb** class, use: new ExternalDb(dbUrl);
 - **externalDbFactory** instance, use: externalDbFactory.create(dbUrl);
