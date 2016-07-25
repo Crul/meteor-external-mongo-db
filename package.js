@@ -19,17 +19,18 @@ Package.onTest(function(api) {
 
   api.use('ecmascript');
   api.use('underscore');
+  api.use('random');
   api.use('tinytest');
 
   api.use('practicalmeteor:sinon');
   api.use('crul:meteor-external-mongo-db');
 
-  api.add_files('lib/utils/meteorUtils.js');
-  api.add_files('lib/remoteDb/remoteDbPublisher.js', 'server');
-  api.add_files('lib/remoteDb/remoteDb.js');
+  api.add_files('lib/utils/meteorWrap.js');
+  api.add_files('lib/externalDb/externalDbPublisher.js', 'server');
+  api.add_files('lib/externalDb/externalDb.js');
   
   api.add_files('tests/doubles.js');
 
-  api.add_files('tests/remoteDb-tests.js');
-  api.add_files('tests/remoteDbPublisher-tests.js', 'server');
+  api.add_files('tests/externalDb-tests.js');
+  api.add_files('tests/externalDbPublisher-tests.js', 'server');
 });
