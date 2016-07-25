@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Crul/meteor-external-mongo-db.svg?branch=master)](https://travis-ci.org/Crul/meteor-external-mongo-db)
+
 # meteor external mongo db
 
 external mongo db connector for angular meteor apps
