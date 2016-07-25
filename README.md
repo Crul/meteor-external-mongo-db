@@ -86,7 +86,7 @@ this packages exports **ExternalMongoDb** class (server side) which has 2 method
             Meteor.subscribe(collectionName);
             collections[collectionName] = collections[collectionName] || new Meteor.Collection(collectionName) 
             Collection = collections[collectionName];
-            Session.set('collectionLoaded', true)
+            Session.set('collectionLoaded', true);
         }
     });
     ```
