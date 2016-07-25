@@ -10,6 +10,8 @@ meteor add crul:meteor-external-mongo-db
 
 ## quick start
 
+autopulibsh should be removed
+
 ```javascript
 if (Meteor.isServer) {
     import { ExternalMongoDb } from 'meteor/crul:meteor-external-mongo-db';
@@ -38,6 +40,7 @@ this packages exports **ExternalMongoDb** class (server side) which has 2 method
 
 - remove items limit
 - add pagination
+- add autopulish detection
 - disconnect / reconnect
 
 # example project instructions 
