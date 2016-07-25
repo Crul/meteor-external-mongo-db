@@ -1,6 +1,6 @@
 # meteor external mongo db [![Build Status](https://travis-ci.org/Crul/meteor-external-mongo-db.svg?branch=master)](https://travis-ci.org/Crul/meteor-external-mongo-db)
 
-external mongo db connector for angular meteor apps
+external / remote mongo db connector for angular meteor apps
 
 ```Batchfile
 meteor add crul:meteor-external-mongo-db
@@ -10,10 +10,10 @@ meteor add crul:meteor-external-mongo-db
 
 ```javascript
 if (Meteor.isServer) {
-    import { ExternalMongoDb } from 'meteor/crul:meteor-external-mongo-db';
-    let externalMongoDb = new ExternalMongoDb();
-    externalMongoDb.connect('mongodb://127.0.0.1:27017/dbName');
-    externalMongoDb.disconnect('dbName');
+    import { ExternalDbPublisher } from 'meteor/crul:meteor-external-mongo-db';
+    let ExternalDbPublisher = new ExternalDbPublisher();
+    ExternalDbPublisher.connect('mongodb://127.0.0.1:27017/dbName');
+    ExternalDbPublisher.disconnect('dbName');
 }
 ```
 
@@ -25,12 +25,16 @@ if (Meteor.isServer) {
 
 ## api
 
-this packages exports **ExternalMongoDb** class (server side) which has 2 methods:
-- **connect(dbUrl)**: it publish:
-    - a collection named **'dbName-collections'** with the collections of the remote DB
-    - all the server collections with plain names, find function signature: **find(where, options)**
+this packages exports:
+- **ExternalDbPublisher** class (server side) which has 2 methods:
+    - **connect(dbUrl)**: it publish:
+        - a collection named **'dbName-collections'** with the collections of the remote DB
+        - all the server collections with plain names, find function signature: **find(where, options)**
 
-- disconnect(dbName): not working :( 
+    - *disconnect(dbName)*: not working :( 
+
+- **ExternalDb** new ExternalDb(dbUrl)
+- **ExternalDbFactory** method create(dbUrl)
 
 ! because collections are published with plain names, remote DB should have no collection with same name than collections in local DB  
 
@@ -47,7 +51,6 @@ this packages exports **ExternalMongoDb** class (server side) which has 2 method
     ```Batchfile
     meteor create meteorTestApp
     cd meteorTestApp
-    meteor add sesion
     meteor add crul:meteor-external-mongo-db
     ```
 
@@ -55,11 +58,11 @@ this packages exports **ExternalMongoDb** class (server side) which has 2 method
 
     ```javascript
     import { Meteor } from 'meteor/meteor';
-    import { ExternalMongoDb } from 'meteor/crul:meteor-external-mongo-db';
+    import { ExternalDbPublisher } from 'meteor/crul:meteor-external-mongo-db';
 
     Meteor.startup(() => {
-        var externalMongoDb = new ExternalMongoDb();
-        externalMongoDb.connect('mongodb://127.0.0.1:27017/dbName');
+        var ExternalDbPublisher = new ExternalDbPublisher();
+        ExternalDbPublisher.connect('mongodb://127.0.0.1:27017/dbName');
     });
     ```
 
