@@ -30,9 +30,15 @@ if (Meteor.isServer) {
 this packages exports **ExternalMongoDb** class (server side) which has 2 methods:
 - connect(dbUrl): it publish:
     - a collection named 'dbName-collections' with the collections of the remote DB
-    - all the server collections with plain names, so remote server should have no collections with same name in local DB
+    - all the server collections with plain names, so remote server should have no collections with same name in local DB. **right now items are limited to 10 results**
 
 - disconnect(dbName): not working :( 
+
+## roadmap
+
+- remove items limit
+- add pagination
+- disconnect / reconnect
 
 # example project instructions 
 
