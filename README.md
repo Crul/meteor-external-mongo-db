@@ -8,8 +8,6 @@ meteor add crul:meteor-external-mongo-db
 
 ## quick start
 
-autopulibsh should be removed
-
 ```javascript
 if (Meteor.isServer) {
     import { ExternalMongoDb } from 'meteor/crul:meteor-external-mongo-db';
@@ -28,17 +26,17 @@ if (Meteor.isServer) {
 ## api
 
 this packages exports **ExternalMongoDb** class (server side) which has 2 methods:
-- connect(dbUrl): it publish:
-    - a collection named 'dbName-collections' with the collections of the remote DB
-    - all the server collections with plain names, so remote server should have no collections with same name in local DB. **right now items are limited to 10 results**
+- **connect(dbUrl)**: it publish:
+    - a collection named **'dbName-collections'** with the collections of the remote DB
+    - all the server collections with plain names, find function signature: **find(where, options)**
 
 - disconnect(dbName): not working :( 
 
+! because collections are published with plain names, remote DB should have no collection with same name than collections in local DB  
+
 ## roadmap
 
-- remove items limit
-- add pagination
-- add autopulish detection
+- add configuration/settings (optional prefix for collections)
 - disconnect / reconnect
 
 # example project instructions 
@@ -48,7 +46,6 @@ this packages exports **ExternalMongoDb** class (server side) which has 2 method
     ```Batchfile
     meteor create meteorTestApp
     cd meteorTestApp
-    meteor remove autopublish
     meteor add sesion
     meteor add crul:meteor-external-mongo-db
     ```
