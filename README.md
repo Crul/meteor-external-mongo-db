@@ -6,13 +6,24 @@ external mongo db connector for angular meteor apps
 meteor add crul:meteor-external-mongo-db
 ```
 
+## quick start
+
+```javascript
+if (Meteor.isServer) {
+    import { ExternalMongoDb } from 'meteor/crul:meteor-external-mongo-db';
+    let externalMongoDb = new ExternalMongoDb();
+    externalMongoDb.connect('mongodb://127.0.0.1:27017/dbName');
+    externalMongoDb.disconnect('dbName');
+}
+```
+
 ## dependencies
 
 - ecmascript
 - underscore
 - random 
 
-## package exports
+## api
 
 this packages exports **ExternalMongoDb** class (server side) which has 2 methods:
 - connect(dbUrl): it publish:
@@ -20,13 +31,6 @@ this packages exports **ExternalMongoDb** class (server side) which has 2 method
     - all the server collections with plain names, so remote server should have no collections with same name in local DB
 
 - disconnect(dbName): not working :( 
-
-```javascript
-import { ExternalMongoDb } from 'meteor/crul:meteor-external-mongo-db';
-let externalMongoDb = new ExternalMongoDb();
-externalMongoDb.connect('mongodb://127.0.0.1:27017/dbName');
-externalMongoDb.disconnect('dbName');
-```
 
 # example project instructions 
 
