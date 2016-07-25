@@ -9,11 +9,12 @@ meteor add crul:meteor-external-mongo-db
 ## quick start
 
 ```javascript
+import { ExternalDbPublisher } from 'meteor/crul:meteor-external-mongo-db';
+
 if (Meteor.isServer) {
-    import { ExternalDbPublisher } from 'meteor/crul:meteor-external-mongo-db';
-    let ExternalDbPublisher = new ExternalDbPublisher();
-    ExternalDbPublisher.connect('mongodb://127.0.0.1:27017/dbName');
-    ExternalDbPublisher.disconnect('dbName');
+    var externalDbPublisher = new ExternalDbPublisher();
+    externalDbPublisher.connect('mongodb://127.0.0.1:27017/dbName');
+    externalDbPublisher.disconnect('dbName');
 }
 ```
 
@@ -33,8 +34,8 @@ this packages exports:
 
     - *disconnect(dbName)*: not working :( 
 
-- **ExternalDb** new ExternalDb(dbUrl)
-- **ExternalDbFactory** method create(dbUrl)
+- **ExternalDb** class, use: new ExternalDb(dbUrl);
+- **externalDbFactory** instance, use: externalDbFactory.create(dbUrl);
 
 ! because collections are published with plain names, remote DB should have no collection with same name than collections in local DB  
 
@@ -58,11 +59,11 @@ this packages exports:
 
     ```javascript
     import { Meteor } from 'meteor/meteor';
-    import { ExternalDbPublisher } from 'meteor/crul:meteor-external-mongo-db';
+    import ExternalDbPublisher from 'meteor/crul:meteor-external-mongo-db';
 
     Meteor.startup(() => {
-        var ExternalDbPublisher = new ExternalDbPublisher();
-        ExternalDbPublisher.connect('mongodb://127.0.0.1:27017/dbName');
+        var externalDbPublisher = new ExternalDbPublisher();
+        externalDbPublisher.connect('mongodb://127.0.0.1:27017/dbName');
     });
     ```
 
@@ -72,8 +73,8 @@ this packages exports:
     import { Meteor } from 'meteor/meteor';
     import './main.html';
 
-    Meteor.subscribe('umdm-collections');
-    let Collections = new Meteor.Collection('umdm-collections');
+    Meteor.subscribe('dbName-collections');
+    let Collections = new Meteor.Collection('dbName-collections');
     let Collection;
     let collections = {};
 
@@ -82,7 +83,7 @@ this packages exports:
             return Collections.find({});
         },
         collection() {
-            return Collection.find({});
+            return Collection.find({}, { limit: 10 });
         },
         collectionLoaded() {
             return Session.get('collectionLoaded');
