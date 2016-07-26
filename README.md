@@ -1,6 +1,6 @@
 # meteor external mongo db [![Build Status](https://travis-ci.org/Crul/meteor-external-mongo-db.svg?branch=master)](https://travis-ci.org/Crul/meteor-external-mongo-db)
 
-external / remote mongo db connector for angular meteor apps
+external / remote mongo db connector for meteor apps
 
 ```Batchfile
 meteor add crul:meteor-external-mongo-db
