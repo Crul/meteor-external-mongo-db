@@ -21,7 +21,7 @@ Tinytest.add('ExternalDbPublisher should connect', function (test) {
   test.isTrue(meteorWrap.bindEnvironment.calledOnce);
   test.isTrue(externalDbMock.collectionNames.calledOnce);
   test.isTrue(externalDbMock.collectionNames.calledWith(bindEnvironmentFn));
-  test.equal(externalDbPublisher.dbPool[testData.name], externalDbMock);
+  test.equal(externalDbPublisher.dbPool[testData.url], externalDbMock);
 });
 
 Tinytest.add('ExternalDbPublisher should not connect if connectionIsOpened', function (test) {
