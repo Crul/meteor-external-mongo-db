@@ -11,7 +11,7 @@ Package.onUse(function(api) {
   api.use('ecmascript');
   api.use('underscore');
   api.use('random');
-  api.mainModule('meteor-external-mongo-db.js', 'server');
+  api.mainModule('meteor-external-mongo-db.js');
 });
 
 Package.onTest(function(api) {
