@@ -43,7 +43,7 @@ Tinytest.add('ExternalDbPublisher should disconnect', function (test) {
   let externalDbPublisher = new ExternalDbPublisher();
   externalDbPublisher.dbPool[testData.name] = externalDbMock;
 
-  externalDbPublisher.disconnect(testData.name);
+  externalDbPublisher.disconnect(testData.url);
 
   test.isTrue(externalDbMock.close.calledOnce);
 });
