@@ -15,35 +15,39 @@ testData = {
 };
 
 MongoInternals = MongoInternals || {};
-MongoInternals.RemoteCollectionDriver = MongoInternals.RemoteCollectionDriver || _.identity;
+MongoInternals.RemoteCollectionDriver = MongoInternals.RemoteCollectionDriver || _.identity.bind({});
 connectionMock = {
     mongo: {
-        close: sinon.spy(_.identity),
+        close: sinon.spy(_.identity.bind({})),
         db: {
-            listCollections: sinon.spy(_.identity)
+            listCollections: _.identity.bind({})
         }
     }
 };
+connectionMongoDbListCollectionsMock= {
+    toArray: sinon.spy(_.identity.bind({}))
+}
+sinon.stub(connectionMock.mongo.db, 'listCollections').returns(connectionMongoDbListCollectionsMock);
 sinon.stub(MongoInternals, 'RemoteCollectionDriver').returns(connectionMock);
 
 Mongo = Mongo || {};
-Mongo.Collection = Mongo.Collection || _.identity;
+Mongo.Collection = Mongo.Collection || _.identity.bind({});
 collectionMock = {};
 sinon.stub(Mongo, 'Collection').returns(collectionMock);
 
 externalDbMock = {
     name: testData.name,
-    listCollections: sinon.spy(_.identity),
-    open: sinon.spy(_.identity),
-    close: sinon.spy(_.identity),
-    isConnected:_.identity,
-    createCollection: _.identity
+    listCollections: sinon.spy(_.identity.bind({})),
+    open: sinon.spy(_.identity.bind({})),
+    close: sinon.spy(_.identity.bind({})),
+    isConnected:_.identity.bind({}),
+    createCollection: _.identity.bind({})
 };
 
 sinon.stub(externalDbMock, 'isConnected');
 sinon.stub(externalDbMock, 'createCollection');
 
-bindEnvironmentFn = _.identity;
+bindEnvironmentFn = _.identity.bind({});
 sinon.stub(meteorWrap, 'bindEnvironment').returns(bindEnvironmentFn);
 
 sinon.stub(externalDbFactory, 'create').returns(externalDbMock);
