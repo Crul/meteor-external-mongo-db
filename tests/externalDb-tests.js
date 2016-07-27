@@ -70,13 +70,15 @@ if (Meteor.isServer) {
   Tinytest.add('ExternalDb should call listCollections', function (test) {
     let callback = _.identity;
     listCollectionsSpy.reset();
+    connectionMongoDbListCollectionsMock.toArray.reset();
 
     let externalDb = new ExternalDb(testData.url);
     externalDb.open();
     externalDb.listCollections(callback);
 
     test.isTrue(listCollectionsSpy.calledOnce);
-    test.isTrue(listCollectionsSpy.calledWith(callback));
+    test.isTrue(connectionMongoDbListCollectionsMock.toArray.calledOnce);
+    test.isTrue(connectionMongoDbListCollectionsMock.toArray.calledWith(callback));
   });
   
   Tinytest.add('ExternalDb should create collection with driver if has been opened', function (test) {
