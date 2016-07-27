@@ -10,7 +10,7 @@ Tinytest.add('ExternalDbPublisher', function (test) {
 
 Tinytest.add('ExternalDbPublisher should connect', function (test) {
   externalDbMock.open.reset();
-  externalDbMock.collectionNames.reset();
+  externalDbMock.listCollections.reset();
   let externalDbPublisher = new ExternalDbPublisher();
   externalDbPublisher.externalDbFactory.create.reset();
 
@@ -19,8 +19,8 @@ Tinytest.add('ExternalDbPublisher should connect', function (test) {
   test.isTrue(externalDbPublisher.externalDbFactory.create.calledOnce);
   test.isTrue(externalDbMock.open.calledOnce);
   test.isTrue(meteorWrap.bindEnvironment.calledOnce);
-  test.isTrue(externalDbMock.collectionNames.calledOnce);
-  test.isTrue(externalDbMock.collectionNames.calledWith(bindEnvironmentFn));
+  test.isTrue(externalDbMock.listCollections.calledOnce);
+  test.isTrue(externalDbMock.listCollections.calledWith(bindEnvironmentFn));
   test.equal(externalDbPublisher.dbPool[testData.url], externalDbMock);
 });
 
