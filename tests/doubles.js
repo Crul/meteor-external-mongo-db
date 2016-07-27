@@ -20,7 +20,7 @@ connectionMock = {
     mongo: {
         close: sinon.spy(_.identity),
         db: {
-            collectionNames: sinon.spy(_.identity)
+            listCollections: sinon.spy(_.identity)
         }
     }
 };
@@ -33,7 +33,7 @@ sinon.stub(Mongo, 'Collection').returns(collectionMock);
 
 externalDbMock = {
     name: testData.name,
-    collectionNames: sinon.spy(_.identity),
+    listCollections: sinon.spy(_.identity),
     open: sinon.spy(_.identity),
     close: sinon.spy(_.identity),
     isConnected:_.identity,

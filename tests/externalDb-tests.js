@@ -4,7 +4,7 @@ import ExternalDb from '../lib/externalDb/externalDb';
 
 let remoteCollectionDriverStub = MongoInternals.RemoteCollectionDriver;
 let closeConnectionSpy = connectionMock.mongo.close;
-let collectionNamesSpy = connectionMock.mongo.db.collectionNames;
+let listCollectionsSpy = connectionMock.mongo.db.listCollections;
 let mongoCollectionStub = Mongo.Collection;
 
 Tinytest.add('ExternalDb', function (test) {
@@ -67,16 +67,16 @@ if (Meteor.isServer) {
     test.isTrue(closeConnectionSpy.calledOnce);
   });
 
-  Tinytest.add('ExternalDb should call collectionNames', function (test) {
+  Tinytest.add('ExternalDb should call listCollections', function (test) {
     let callback = _.identity;
-    collectionNamesSpy.reset();
+    listCollectionsSpy.reset();
 
     let externalDb = new ExternalDb(testData.url);
     externalDb.open();
-    externalDb.collectionNames(callback);
+    externalDb.listCollections(callback);
 
-    test.isTrue(collectionNamesSpy.calledOnce);
-    test.isTrue(collectionNamesSpy.calledWith(callback));
+    test.isTrue(listCollectionsSpy.calledOnce);
+    test.isTrue(listCollectionsSpy.calledWith(callback));
   });
   
   Tinytest.add('ExternalDb should create collection with driver if has been opened', function (test) {
